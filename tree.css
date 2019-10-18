@@ -1,0 +1,29 @@
+body {
+    background-color: #d0e4fe;
+}
+
+#node {
+    cursor: auto;
+}
+
+#node circle {
+    fill: rgb(174, 53, 164);
+    stroke: rgb(224, 124, 9);
+    stroke-width: 3px;
+}
+
+#node rect {
+    fill: #800000;
+    stroke: #800000;
+    stroke-width: 1.5px;
+}
+
+#node text {
+    font: 10px "楷体", sans-serif;
+}
+
+#link {
+    fill: none;
+    stroke: rgb(28, 235, 166);
+    stroke-width: 2px;
+}
