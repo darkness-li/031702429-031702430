@@ -65,41 +65,38 @@
 
         function getdata() {
             var text = $("#text").val(); //获取id为text的textarea的全部内容
-            var text1 = text.split("\n\n");
-            for (var k = 0; k < text1.length; k++) {
-                var arry = text1[k].split("\n");
+            var text1 = text.split("\n\n");//针对多组数据输入的情况，以“\n\n"为关键字进行分组，调用split函数进行分割
+            for (var k = 0; k < text1.length; k++) { //text1.length用于得到分组的数量
+                var arry = text1[k].split("\n");//针对每一组数据，以“\n"为关键字进行分组，得到每条导师和学生的信息
                 var teacher = {
                         name: '',
                         children: []
                     }
-                    //var treeData=[];
+
                 for (var ii = 0; ii < arry.length; ii++) {
-                    var newarr = arry[ii].split("：");
+                    var newarr = arry[ii].split("：");//针对每条导师和学生的信息，以“：”为关键字进行分组，可得到身份标签和身份信息
                     var type = [];
                     var type1 = [];
-                    var a1 = newarr[0]; //获取身份信息
+                    var a1 = newarr[0]; //获取身份标签，如导师、2016级博士生等，保存在a1变量
                     if (ii != 0) {
                         type1.name = a1;
                     }
-                    //alert(a1);
-                    var a2 = newarr[1];
-                    var a3 = a2.split("、");
-                    for (var j = 0; j < a3.length; j++) { //获取名字
-                        //alert(a3[j]);
+                    var a2 = newarr[1];//获取身份信息，如天一、王二、吴五等，保存在a2变量
+                    var a3 = a2.split("、");//针对每组身份信息，以“、”为关键字进行切分，得到每个人的名字信息
+                    for (var j = 0; j < a3.length; j++) { //a3.length用于得到每条身份信息里名字的数量
+
                         var student = {};
                         if (ii == 0) {
                             teacher.name = a3[j];
                         }
                         if (ii != 0) {
                             student.name = a3[j];
-                            //alert(student.name);
                             type.push(student);
-                            //alert(type);
+
                         }
                     }
                     if (ii != 0) {
                         type1.children = type;
-                        //alert(type1.children)
                         teacher.children.push(type1);
                     }
                 }
@@ -109,8 +106,6 @@
                 maketree(k);
             }
         }
-        //alert(treeData[0]);
-        // console.log(treeData[k]);
 
         function maketree(k) {
             var margin = {
@@ -187,26 +182,6 @@
                     .attr("rx", 10)
                     .style("fill", "#800000"); //d 代表数据，也就是与某元素绑定的数据。
 
-                //添加标签
-                /*  nodeEnter.append("text")
-                    .attr("x", function(d) {
-                        return d.children || d._children ? 13 : 13;
-                    })
-                    .attr("dy", "-4")
-                      // .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
-                    .attr("text-anchor", "middle")
-                    .text(function(d) {
-                        return d.name;
-                    })
-                    .style("fill", "white")
-                    .style("fill-opacity", 1e-6);
-
-                nodeEnter.append("line")
-                    .attr("x1", "-25")
-                    .attr("y1", "0")
-                    .attr("x2", "50")
-                    .attr("y", "0")
-                    .attr("stroke", "white")*/
 
                 nodeEnter.append("text")
                     .attr("x", function(d) {
@@ -250,13 +225,7 @@
 
                 nodeExit.select("circle")
                     .attr("r", 1e-6);
-                //nodeExit.select("rect")
-                //.attr("x", -23)
-                // .attr("y", -10)
-                //.attr("width", 70)
-                //.attr("height", 20)
-                //.attr("rx", 10)
-                //.style("fill", "#800000");
+
 
                 nodeExit.select("text")
                     .attr("text-anchor", "middle")
